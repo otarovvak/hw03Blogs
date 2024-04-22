@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import PostForm from "./components/PostForm";
 
-function App() {
+const App = () => {
+  const [posts, setPosts] = useState([]);
+
+  const handleSubmit = (post) => {
+    setPosts([post, ...posts]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <PostForm onSubmit={handleSubmit} />
+      <div>
+        {posts.map((post, index) => (
+          <div key={index}>
+            {" "}
+            <h2>{post.title}</h2>
+            <p>{post.content}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default App;
